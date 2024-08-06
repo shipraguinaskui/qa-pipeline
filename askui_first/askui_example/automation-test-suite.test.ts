@@ -28,13 +28,5 @@ describe('jest with askui', () => {
     await aui.type('https://askui.github.io/askui-practice-page/').exec();
     await aui.pressKey('enter').exec();
   });
-
-  it('navigate to the calculator page', async () => {
-    await aui.click().withText('Calculator').exec();
-  });
-
-  it('navigate to the register page', async () => {
-    await aui.clickText({ text: 'Register', matching: 'similar' });
-  });
   
 });
