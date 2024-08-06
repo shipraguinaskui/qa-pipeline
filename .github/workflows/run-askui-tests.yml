@@ -1,0 +1,39 @@
+name: Run ASKUI Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: self-hosted # You can use other runner types if necessary
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Set ASKUI Settings and Start Controller
+        run: |
+          askui-shell << EOF
+          AskUI-SetSettings -WorkspaceId ${{ secrets.ASKUI_WORKSPACE_ID }} -Token ${{ secrets.ASKUI_TOKEN }}
+          AskUI-StartController -RunInBackground
+          EOF
+
+      - name: Run Specific Jest Test File
+        run: |
+          cd askui_first
+          askui-shell << EOF
+          AskUI-RunProject
+          EOF
