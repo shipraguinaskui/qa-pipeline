@@ -1,0 +1,11 @@
+{
+  "packages": {
+    "NodeJS": "/Applications/askui-shell.app/Contents/Resources/DependencyCache/Links/NodeJS",
+    "PowerShell": "/Applications/askui-shell.app/Contents/Resources/DependencyCache/Links/PowerShell"
+  },
+  "environmentVariables": {},
+  "credentials": {
+    "workspaceId": "${ASKUI_WORKSPACE_ID}",
+    "token": "${ASKUI_TOKEN}"
+  }
+}
