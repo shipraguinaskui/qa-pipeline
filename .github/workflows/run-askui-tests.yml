@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: self-hosted # You can use other runner types if necessary
+    runs-on: self-hosted
 
     steps:
       - name: Checkout repository
@@ -22,14 +22,16 @@ jobs:
           node-version: '16'
 
       - name: Install dependencies
+        run: npm install
+
+      - name: Replace placeholders in AskuiEnvironmentSettings.json
         run: |
-          cd askui_first
-          npm install
+          sed -i '' 's/\${ASKUI_WORKSPACE_ID}/${{ secrets.ASKUI_WORKSPACE_ID }}/g' askui_first/.askui/Settings/AskuiEnvironmentSettings.json
+          sed -i '' 's/\${ASKUI_TOKEN}/${{ secrets.ASKUI_TOKEN }}/g' askui_first/.askui/Settings/AskuiEnvironmentSettings.json
 
       - name: Set ASKUI Settings and Start Controller
         run: |
           askui-shell << EOF
-          AskUI-SetSettings -WorkspaceId ${{ secrets.ASKUI_WORKSPACE_ID }} -Token ${{ secrets.ASKUI_TOKEN }}
           AskUI-StartController -RunInBackground
           EOF
 
