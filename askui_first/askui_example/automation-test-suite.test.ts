@@ -47,7 +47,7 @@ describe('jest with askui', () => {
   });
 
   it('navigate to the register page', async () => {
-    await aui.clickText({ text: 'Register', type: 'similar' });
+    await aui.clickText({ text: 'Register', matching: 'similar' });
   });
 
   it('fill the text fields', async () => {
@@ -60,16 +60,16 @@ describe('jest with askui', () => {
   });
 
   it('scroll and select option from dropdown', async () => {
-    await aui.clickText({ text: 'Select Date', type: 'similar' });
+    await aui.clickText({ text: 'Select Date', matching: 'similar' });
     await aui.scroll(0, -400).exec();
     await aui.click().text('23').exec();
 
-    await aui.clickText({ text: 'Select Month', type: 'similar' });
+    await aui.clickText({ text: 'Select Month', matching: 'similar' });
     const downNumber = Math.floor(Math.random() * 12) + 1;
     await aui.pressKeyNTimes('down', downNumber);
     await aui.pressKey('enter').exec();
 
-    await aui.clickText({ text: 'Select Year', type: 'similar' });
+    await aui.clickText({ text: 'Select Year', matching: 'similar' });
     await aui.scroll(0, -40).exec();
     await aui.click().text('1994').exec();
   });
